@@ -35,13 +35,14 @@ export class ViewAllBooksComponent implements OnInit{
       console.log("deleted"+this.selectedBook.id);
       console.log(data);
       this.loadBooks();
-      this.selectedBook=null;
-
       Swal.fire({
-        title: "Good job!",
-        text: "Book Delete",
+        title: "Deleted!",
+        text: `${this.selectedBook.title} book is deleted`,
         icon: "success"
       });
+      this.selectedBook=null;
+
+      
     });
   }
   setSelectedBook(book :any){
@@ -54,6 +55,11 @@ export class ViewAllBooksComponent implements OnInit{
     let postApi="http://localhost:8080/book/add";
     this.http.post(postApi,this.selectedBook).subscribe((data)=>{
       console.log("saved");
+      Swal.fire({
+        title: "Updated!",
+        text: `${this.selectedBook.title} book is updated`,
+        icon: "success"
+      });
       this.selectedBook=null;
     });
   }
