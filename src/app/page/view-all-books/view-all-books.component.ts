@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -34,11 +35,26 @@ export class ViewAllBooksComponent implements OnInit{
       console.log("deleted"+this.selectedBook.id);
       console.log(data);
       this.loadBooks();
+      this.selectedBook=null;
+
+      Swal.fire({
+        title: "Good job!",
+        text: "Book Delete",
+        icon: "success"
+      });
     });
   }
   setSelectedBook(book :any){
     this.selectedBook=book;
     console.log(book.id);
-    this.deleteBook();
+
+  }
+
+  saveBook(){
+    let postApi="http://localhost:8080/book/add";
+    this.http.post(postApi,this.selectedBook).subscribe((data)=>{
+      console.log("saved");
+      this.selectedBook=null;
+    });
   }
 }
