@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 
+
+
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -12,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit{
+
   private http;
   public countryList :any;
   public selectedCountry:any;
@@ -47,7 +51,7 @@ export class RegisterComponent implements OnInit{
   }
   createBorrower(){
     this.borrower.country=this.selectedCountry;
-    this.http.post("http://localhost:8080/borrower/add",this.borrower)
+    this.http.post("http://localhost:8081/borrower/add",this.borrower)
       .subscribe(data=>{
         console.log("done");
         this.setFieldsAsNull();
@@ -68,5 +72,5 @@ export class RegisterComponent implements OnInit{
     this.borrower.password=null;
     this.borrower.country=null;
   }
-  
+ 
 }
